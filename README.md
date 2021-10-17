@@ -1,4 +1,36 @@
-# Подробный гайд по оптимизации сервера Minecraft
+# Подробный гайд по созданию и настройке сервера Minecraft
+## Выбор хостинга
+### VDS Хостинг
+
+да
+
+### Собственный компьютер в качестве хоста
+
+Если Вы хотите использовать собственный ПК в качестве хоста сервера, то Вам понадобится:
+
+* Запустить сервер;
+* Пробросить порты.
+
+Для проброса портов необходим **белый IP**, желательно статический (для удобства), а также, чтобы провайдер не блокировал порты. Пробросить порты по протоколу TCP можно через настройки роутера, брандмауэр и даже торрент-клиент.
+
+**Но что делать, если у Вас серый айпи/провайдер блокирует порты?**
+
+Здесь есть два варианта - воспользоваться Ngrok или же VPN (OpenVPN, HideMyName)
+
+1 способ: заходим на [данный сайт](https://ngrok.com/), регистрируемся и скачиваем программу, после чего заходим в личный кабинет, копируем authtoken, открываем сам ngrok и вставляем туда токен.
+
+`ngrok authtoken ваш токен`
+
+после чего вписываем
+
+`ngrok tcp -region eu 25565`
+
+и получаем наш айпи, по которому можно подключиться к серверу. (такого вида: 0.tcp.eu.ngrok.io:12345)
+
+2 способ:
+
+да
+
 ## Выбор ядра сервера
 
 * [Airplane](https://github.com/Technove/Airplane) - на сегодняшний день является одним из лучших в плане производительности и стабильности. Основано на Paper.
@@ -10,14 +42,9 @@
 * [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) - форк Paper, Tuinity, Airplane, Purpur и Yatopia. Не рекомендую к использованию.
 * [Patina](https://github.com/PatinaMC/Patina) - форк Yatopia. Не рекомендую к использованию.
 
-
 ## Пре-генерация чанков
 
-
-
-It's key to remember that the overworld, nether and the end have separate world borders that need to be set up for each world. The nether dimension is 8x smaller than the overworld (if not modified with a datapack), so if you set the size wrong your players might end up outside of the world border!
-
-**Make sure to set up a vanilla world border (`/worldborder set [radius]`), as it limits certain functionalities such as lookup range for treasure maps that can cause lag spikes.**
+уже завтра
 
 ## Конфигурация файлов
 ### server.properties
@@ -25,24 +52,37 @@ It's key to remember that the overworld, nether and the end have separate world 
 
 `network-compression-threshold`
 
-Данная опция ограничивает размер пакета до того, как сервер попытается его сжать. Установка более высокого значения может сэкономить некоторые ресурсы процессора, а установка на -1 отключает его. Не рекомендуется ставить значение ниже **64** и выше **1500.**
+Данная опция ограничивает размер пакета до того, как сервер попытается его сжать. Установка более высокого значения может сэкономить некоторые ресурсы процессора, а установка значения -1 отключает его. Не рекомендуется ставить значение ниже **64** и выше **1500.**
 
 Примечание: если ваш сервер является локальным, отключение этого параметра (-1) будет полезным.
 
+---
+
 ### bukkit.yml
+
+
+
 ### spigot.yml
+
+#### view-distance
+
+`Good starting value: 4`
+
+View-distance is distance in chunks around the player that the server will tick. Essentially the distance from the player that things will happen. This includes furnaces smelting, crops and saplings growing, etc. You should set this value in [spigot.yml], as it overwrites the one from [`server.properties`] and can be set per-world. This is an option you want to purposefully set low, somewhere around `3` or `4`, because of the existence of `no-tick-view-distance`. No-tick allows players to load more chunks without ticking them. This effectively allows players to see further without the same performance impacts.
+
 ### paper.yml
+
+
+
 ### tuinity.yml
+
+
+
 ### airplane.air
+
+
+
 ### purpur.yml
-
-#### network-compression-threshold
-
-`Good starting value: 256`
-
- If your server is in a network with a proxy or on the same machine (with less than 2 ms ping), disabling this (-1) will be beneficial, since internal network speeds can usually handle the additional uncompressed traffic.
-
-### [purpur.yml]
 
 #### use-alternate-keepalive
 
@@ -52,18 +92,6 @@ You can enable Purpur's alternate keepalive system so players with bad connectio
 
 > Enabling this sends a keepalive packet once per second to a player, and only kicks for timeout if none of them were responded to in 30 seconds. Responding to any of them in any order will keep the player connected. AKA, it won't kick your players because 1 packet gets dropped somewhere along the lines  
 ~ https://purpur.pl3x.net/docs/Configuration/#use-alternate-keepalive
-
----
-
-## Chunks
-
-### [spigot.yml]
-
-#### view-distance
-
-`Good starting value: 4`
-
-View-distance is distance in chunks around the player that the server will tick. Essentially the distance from the player that things will happen. This includes furnaces smelting, crops and saplings growing, etc. You should set this value in [spigot.yml], as it overwrites the one from [`server.properties`] and can be set per-world. This is an option you want to purposefully set low, somewhere around `3` or `4`, because of the existence of `no-tick-view-distance`. No-tick allows players to load more chunks without ticking them. This effectively allows players to see further without the same performance impacts.
 
 ### [paper.yml]
 
