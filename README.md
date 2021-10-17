@@ -1,47 +1,33 @@
-# Подробный гайд по созданию и настройке сервера Minecraft
+# Подробный гайд по оптимизации сервера Minecraft
+## Выбор ядра сервера
 
-Note for users that are on vanilla, Fabric or Spigot (or anything below Paper) - go to your server.properties and change `sync-chunk-writes` to `false`. This option is force disabled on Paper and its forks, but on server implementations before that you need to switch this off manually. This allows the server to save chunks off the main thread, lessening the load on the main tick loop.
+* [Airplane](https://github.com/Technove/Airplane) - на сегодняшний день является одним из лучших в плане производительности и стабильности. Основано на Paper.
+* [Purpur](https://github.com/pl3xgaming/Purpur) - обеспечивает высокую производительность, имеет большое количество геймплейных изменений, удобную конфигурацию. Основано на Airplane.
+* [Paper](https://github.com/PaperMC/Paper) - одно из самых популярных ядер в Minecraft, обеспечивающее хорошую производительность.
+* [Spigot](https://getbukkit.org/download/spigot) - форк CraftBukkit с улучшенной производительностью. На сегодняшний день сильно уступает другим ядрам по производительности.
+* [CraftBukkit](https://getbukkit.org/download/craftbukkit) - ванильное ядро с возможностью ставить плагины. На сегодняшний день сильно уступает другим ядрам по производительности.
+* [Yatopia](https://github.com/YatopiaMC/Yatopia) - форк огромного количества ядер. Крайне нестабильное ядро, не рекомендую использованию.
+* [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) - форк Paper, Tuinity, Airplane, Purpur и Yatopia. Не рекомендую к использованию.
+* [Patina](https://github.com/PatinaMC/Patina) - форк Yatopia. Не рекомендую к использованию.
 
-Guide for version 1.17. Some things may still apply to 1.15 - 1.16.
 
-Based on [this guide](https://www.spigotmc.org/threads/guide-server-optimization%E2%9A%A1.283181/) and other sources (all of them are linked throughout the guide when relevant).
+## Пре-генерация чанков
 
-Use the table of contents located above (next to `README.md`) to easily navigate throughout this guide.
 
-# Intro
-There will never be a guide that will give you perfect results. Each server has their own needs and limits on how much you can or are willing to sacrifice. Tinkering around with the options to fine tune them to your servers needs is what it's all about. This guide only aims to help you understand what options have impact on performance and what exactly they change. If you think you found inaccurate information within this guide, you're free to open an issue or set up a pull request.
-
-# Preparations
-
-## Server JAR
-Your choice of server software can make a huge difference in performance and API possibilities. There are currently multiple viable popular server JARs, but there are also a few that you should stay away from for various reasons.
-
-Recommended top picks:
-* [Paper](https://github.com/PaperMC/Paper) - The most popular server software that aims to improve performance while fixing gameplay and mechanics inconsistencies.
-* [Airplane](https://github.com/Technove/Airplane) - Paper fork that aims to further improve server performance.
-* [Purpur](https://github.com/pl3xgaming/Purpur) - Airplane fork focused on features and the freedom of customization.
-
-You should stay away from:
-* Yatopia - "The combined power of Paper forks for maximum instability and unmaintainablity!" - [KennyTV's list of shame](https://github.com/KennyTV/list-of-shame). Nothing more to be said. (Moreover, the project has been discontinued.)
-* Sugarcane - Yatopia 2.0.
-* Mohist - "Mohist is programmed to be malicious, game-breaking, and very unstable" - [Reasons why you shouldn't use it](https://essentialsx.net/do-not-use-mohist.html)
-* Any paid server JAR that claims async anything - 99.99% chance of being a scam.
-* Bukkit/CraftBukkit/Spigot - Extremely outdated in terms of performance compared to other server software you have access to.
-* Any plugin/software that enables/disables/reloads plugins on runtime. See [this section](#plugins-enablingdisabling-other-plugins) to understand why.
-* Many forks further downstream from Airplane or Purpur will encounter instability and other issues. If you're seeking more performance gains, optimize your server or invest in a personal private fork.
-
-## Map pregen
-Map pregeneration is one of the most important steps in improving a low-budget server. This helps out servers that are hosted on a shared CPU/single core node the most, since they can't fully utilize async chunk loading. You can use a plugin such as [Chunky](https://github.com/pop4959/Chunky) to pregenerate the world. Make sure to set up a world border so your players don't generate new chunks! Note that pregenning can sometimes take hours depending on the radius you set in the pregen plugin.
 
 It's key to remember that the overworld, nether and the end have separate world borders that need to be set up for each world. The nether dimension is 8x smaller than the overworld (if not modified with a datapack), so if you set the size wrong your players might end up outside of the world border!
 
 **Make sure to set up a vanilla world border (`/worldborder set [radius]`), as it limits certain functionalities such as lookup range for treasure maps that can cause lag spikes.**
 
-# Configurations
-
-## Networking
-
-### [server.properties]
+## Конфигурация файлов
+### server.properties
+### [bukkit.yml]
+### [spigot.yml]
+### [paper.yml]
+### [tuinity.yml]
+### [airplane.air]
+### [purpur.yml]
+###
 
 #### network-compression-threshold
 
