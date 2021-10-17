@@ -21,19 +21,26 @@ It's key to remember that the overworld, nether and the end have separate world 
 
 ## Конфигурация файлов
 ### server.properties
-### [bukkit.yml]
-### [spigot.yml]
-### [paper.yml]
-### [tuinity.yml]
-### [airplane.air]
-### [purpur.yml]
-###
+####
+
+`network-compression-threshold`
+
+Данная опция ограничивает размер пакета до того, как сервер попытается его сжать. Установка более высокого значения может сэкономить некоторые ресурсы процессора, а установка на -1 отключает его. Не рекомендуется ставить значение ниже **64** и выше **1500.**
+
+Примечание: если ваш сервер является локальным, отключение этого параметра (-1) будет полезным.
+
+### bukkit.yml
+### spigot.yml
+### paper.yml
+### tuinity.yml
+### airplane.air
+### purpur.yml
 
 #### network-compression-threshold
 
 `Good starting value: 256`
 
-This allows you to set the cap for the size of a packet before the server attempts to compress it. Setting it higher can save some CPU resources at the cost of bandwidth, and setting it to -1 disables it. Setting this higher may also hurt clients with slower network connections. If your server is in a network with a proxy or on the same machine (with less than 2 ms ping), disabling this (-1) will be beneficial, since internal network speeds can usually handle the additional uncompressed traffic.
+ If your server is in a network with a proxy or on the same machine (with less than 2 ms ping), disabling this (-1) will be beneficial, since internal network speeds can usually handle the additional uncompressed traffic.
 
 ### [purpur.yml]
 
