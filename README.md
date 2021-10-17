@@ -31,6 +31,10 @@
 
 да
 
+### Буквенный IP
+
+Вам нужно получить свой домен (бесплатно его можно получить [здесь](https://www.freenom.com/ru/index.html?lang=ru)), после чего на [cloudflare](https://www.cloudflare.com/ru-ru/) создать SRV запись.
+
 ## Выбор ядра сервера
 
 * [Airplane](https://github.com/Technove/Airplane) - на сегодняшний день является одним из лучших в плане производительности и стабильности. Основано на Paper.
