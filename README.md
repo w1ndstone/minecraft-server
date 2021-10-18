@@ -17,7 +17,7 @@
 
 **Но что делать, если у Вас серый айпи/провайдер блокирует порты?**
 
-Здесь есть два варианта - воспользоваться Ngrok или VPN (OpenVPN, HideMyName)
+Здесь есть три варианта - воспользоваться Ngrok, VPN (OpenVPN, HideMyName) или [IPv6](http://rubukkit.org/threads/ipv6-shag-v-buduschee-ili-obxodim-seryj-ip-bez-hamachi.35342/)
 
 С помощью ngrok: заходим на [данный сайт](https://ngrok.com/), регистрируемся и скачиваем программу, после чего заходим в личный кабинет, копируем authtoken, открываем сам ngrok и вставляем туда токен:
 
@@ -29,13 +29,26 @@
 
 и получаем наш айпи, по которому можно подключиться к серверу. (такого вида: 0.tcp.eu.ngrok.io:12345)
 
-С помощью VPN:
-
-
-
 ### Буквенный IP
 
 Для этого Вам нужно получить свой домен, после чего на [cloudflare](https://www.cloudflare.com/ru-ru/) создать SRV запись.
+
+## Оптимизация операционной системы
+
+### Linux
+
+Linux CPU scaling 
+Some hosts might ship machines running in "PowerSave" mode. This can result in nearly 25% lower clock speeds and thus vastly lower single threaded performance. This can lead to severly worse performance than setting the CPU scaling to performance mode. Please note that this might be unavailable for VPS.
+
+For Debian / Ubuntu
+
+`cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor` Shows the CPU's performance profile.
+
+`echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor` Sets profile to performance.
+
+### Windows
+
+
 
 ## Java
 
@@ -44,6 +57,8 @@
 * [AdoptOpenJDK](https://adoptopenjdk.net/installation.html?variant=openjdk16&jvmVariant=hotspot)
 * [ZuluJDK](https://www.azul.com/downloads/?package=jdk)
 * [AmazonJDK](https://aws.amazon.com/ru/corretto/)
+
+You can find startup flags optimized for Minecraft servers [here](https://mcflags.emc.gs/) [`SOG`]. Keep in mind that this recommendation will not work on alternative jvm implementations.
 
 ## Выбор ядра сервера
 
@@ -129,34 +144,27 @@ You can enable Purpur's alternate keepalive system so players with bad connectio
 
 -------------------------------------------------
 
-Your garbage collector can be configured to reduce lag spikes caused by big garbage collector tasks. You can find startup flags optimized for Minecraft servers [here](https://mcflags.emc.gs/) [`SOG`]. Keep in mind that this recommendation will not work on alternative jvm implementations.
-
-# Linux CPU scaling 
-Some hosts might ship machines running in "PowerSave" mode. This can result in nearly 25% lower clock speeds and thus vastly lower single threaded performance. This can lead to severly worse performance than setting the CPU scaling to performance mode. Please note that this might be unavailable for VPS.
-
-For Debian / Ubuntu
-
-`cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor` Shows the CPU's performance profile.
-
-`echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor` Sets profile to performance.
-
 # "Too good to be true" plugins
 
 ## Plugins removing ground items
 Absolutely unnecessary since they can be replaced with [merge radius](#merge-radius) and [alt-item-despawn-rate](#alt-item-despawn-rate) and frankly, they're less configurable than basic server configs. They tend to use more resources scanning and removing items than not removing the items at all.
 
 ## Mob stacker plugins
+
 It's really hard to justify using one. Stacking naturally spawned entities causes more lag than not stacking them at all due to the server constantly trying to spawn more mobs. The only "acceptable" use case is for spawners on servers with a large amount of spawners.
 
 ## Plugins enabling/disabling other plugins
+
 Anything that enables or disables plugins on runtime is extremely dangerous. Loading a plugin like that can cause fatal errors with tracking data and disabling a plugin can lead to errors due to removing dependency. The `/reload` command suffers from exact same issues and you can read more about them in [me4502's blog post](https://madelinemiller.dev/blog/problem-with-reload/)
 
 # What's lagging? - measuring performance
 
 ## mspt
+
 Paper offers a `/mspt` command that will tell you how much time the server took to calculate recent ticks. If the first and second value you see are lower than 50, then congratulations! Your server is not lagging! If the third value is over 50 then it means there was at least 1 tick that took longer. That's completely normal and happens from time to time, so don't panic.
 
 ## timings
+
 Great way to see what might be going on when your server is lagging are timings. Timings is a tool that lets you see exactly what tasks are taking the longest. It's the most basic troubleshooting tool and if you ask for help regarding lag you will most likely be asked for your timings.
 
 To get timings of your server you just need to execute the `/timings paste` command and click the link you're provided with. You can share this link with other people to let them help you. It's also easy to misread if you don't know what you're doing. There is a detailed [video tutorial by Aikar](https://www.youtube.com/watch?v=T4J0A9l7bfQ) on how to read them.
