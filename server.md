@@ -137,11 +137,11 @@ You can enable Purpur's alternate keepalive system so players with bad connectio
 
 ### Linux
 
-#### Использование демонов, повышающих производительность системы:
+#### Использование демонов, повышающих производительность системы
 * [Nohang](https://github.com/hakavlad/nohang)
 * [Ananicy](https://github.com/Nefelim4ag/Ananicy)
 
-#### Перевод процессора из энергосбережения в производительный режим:
+#### Перевод процессора из энергосбережения в производительный режим
 
 Debian/Ubuntu
 `cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`
@@ -169,7 +169,7 @@ WantedBy=multi-user.target
 
 ### Windows
 
-.
+#### Использование кастомного поверплана
 
 # "Too good to be true" plugins
 
