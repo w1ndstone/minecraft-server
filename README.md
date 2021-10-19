@@ -49,7 +49,6 @@
 * [Airplane](https://github.com/Technove/Airplane) - на сегодняшний день является одним из лучших в плане производительности и стабильности. Основано на Paper.
 * [Purpur](https://github.com/pl3xgaming/Purpur) - обеспечивает высокую производительность, имеет большое количество геймплейных изменений, удобную конфигурацию. Основано на Airplane.
 * [Paper](https://github.com/PaperMC/Paper) - одно из самых популярных ядер в Minecraft, обеспечивающее неплохую производительность.
-* [SpongeForge]()
 
 Ядра, которые нужно обходить стороной:
 * [Spigot](https://getbukkit.org/download/spigot) - форк CraftBukkit с улучшенной производительностью. На сегодняшний день уступает другим ядрам по производительности.
@@ -58,7 +57,7 @@
 * [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) - форк Paper, Tuinity, Airplane, Purpur и Yatopia.
 * [Patina](https://github.com/PatinaMC/Patina) - форк Yatopia.
 * [Mohist]() - нестабильное ядро.
-* [MCPC+]() - 
+* [MCPC+]() - нестабильное ядро.
 
 ## Пре-генерация чанков
 
@@ -70,68 +69,94 @@
 
 ## Конфигурация файлов
 
-### server.properties
+### [server.properties](https://minecraft.fandom.com/Server.properties)
 
-`network-compression-threshold`
+#### `network-compression-threshold`
 
 Данная опция ограничивает размер пакета до того, как сервер попытается его сжать. Установка более высокого значения может сэкономить некоторые ресурсы процессора, а установка значения `-1` отключает его. Не рекомендуется ставить значение ниже `64`и выше `1500`.
 
 > Оптимальным значением является `512`. Если ваш сервер является локальным, отключение этого параметра (-1) будет полезным.
 
-### bukkit.yml
+### [bukkit.yml](https://bukkit.gamepedia.com/Bukkit.yml)
 
-#### spawn-limits
+#### `allow-end`
 
-```
-Good starting values:
+Данная опция определяет, будет ли включено измерение края. 
 
-    monsters: 20
-    animals: 5
-    water-animals: 2
-    water-ambient: 2
-    ambient: 1
-```
+> Если Вам данное измерение не нужно, можете смело отключать `false`.
 
-The math of limiting mobs is `[playercount] * [limit]`, where "playercount" is current amount of players on the server. Logically, the smaller the numbers are, the less mobs you're gonna see. `per-player-mob-spawn` applies an additional limit to this, ensuring mobs are equally distributed between players. Reducing this is a double-edged sword; yes, your server has less work to do, but in some gamemodes natural-spawning mobs are a big part of a gameplay. You can go as low as 20 or less if you adjust `mob-spawn-range` properly. Setting `mob-spawn-range` lower will make it feel as if there are more mobs around each player. If you are using Paper, you can set mob limits per world in [`paper.yml`].
+#### `spawn-limits`
 
+Данная опция ограничивает количество мобов на всём сервере.
 
+> Оптимальными значениями являются 
 
-### spigot.yml
+> monsters: 50
 
-`view-distance`
+> animals: 8
 
-Это расстояние в чанках вокруг игрока, в которых может что-либо происходить. Это включает в себя плавку в печах, выращивание сельскохозяйственных культур и саженцев и т. Д. Вы должны установить это значение именно в `spigot.yml`, так как оно заменяет значение из `server.properties` и может быть установлено для каждого мира. Это вариант, который вы хотите намеренно установить на низком уровне, где-то около «3» или «4», из-за существования «no-tick-view-distance». Без отметки позволяет игрокам загружать больше кусков, не отмечая их. Это эффективно позволяет игрокам видеть дальше без того же снижения производительности.
+> water-animals: 6
+
+> water-ambient: 10
+
+> ambient: 1
+
+### [spigot.yml](https://www.spigotmc.org/wiki/spigot-configuration/)
+
+#### `view-distance`
+
+Это расстояние в чанках вокруг игрока, в которых может что-либо происходить. Это включает в себя плавку в печах, выращивание саженцев. Вы должны установить это значение именно в `spigot.yml`, так как оно заменяет значение из `server.properties` и может быть установлено для каждого мира.
 
 > Оптимальным значением является `4`.
 
-### paper.yml
+#### `ticks-per`
 
-`anti-xray`
+Данная опция определяет за сколько тиков воронка может передать предмет.
+
+> Оптимальными значениями являются
+
+> hopper-transfer: 8
+
+> hopper-check: 8
+
+### [paper.yml](https://paper.readthedocs.io/en/latest/server/configuration.html)
+
+#### `no-tick-view-distance`
+
+Данная опция определяет расстояние в чанках вокруг игрока, которое будет прогружаться, но в которых ничего не будет происходить.
+
+> Оптимальным значением является `-1`.
+
+#### `optimize-explosions: false`
+
+Данная опция оптимизирует  
+
+#### `anti-xray`
 
 . For detailed configuration of this feature check out [Stonar96's recommended settings](https://gist.github.com/stonar96/ba18568bd91e5afd590e8038d14e245e). Включение данной опции будет снижать производительность сервера, однако, оно все же эффективнее плагинов на anti-xray. В большинстве случаях влияние на производительность незначительная.
 
 > Оптимальным значением является `true`.
 
-### tuinity.yml
+### [tuinity.yml]()
+
+#### `use-new-light-engine`
+
+Данная опция отвечает за использование продвинутого светового движка Starlight.
+
+> Оптимальным значением является `true`.
+
+### [airplane.air](https://github.com/TECHNOVE/Airplane/wiki)
 
 
 
-### airplane.air
+### [purpur.yml](https://purpur.pl3x.net/docs/)
 
-
-
-### purpur.yml
-
-#### use-alternate-keepalive
-
-`Good starting value: true`
+#### `use-alternate-keepalive`
 
 You can enable Purpur's alternate keepalive system so players with bad connection don't get timed out as often. Has known incompatibility with TCPShield.
 
 > Enabling this sends a keepalive packet once per second to a player, and only kicks for timeout if none of them were responded to in 30 seconds. Responding to any of them in any order will keep the player connected. AKA, it won't kick your players because 1 packet gets dropped somewhere along the lines  
 ~ https://purpur.pl3x.net/docs/Configuration/#use-alternate-keepalive
-
--------------------------------------------------
 
 ## Оптимизация операционной системы
 
@@ -144,11 +169,13 @@ You can enable Purpur's alternate keepalive system so players with bad connectio
 #### Перевод процессора из энергосбережения в производительный режим
 
 Debian/Ubuntu
+
 `cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`
 
 `echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor` Sets profile to performance.
 
 Arch
+
 `sudo pacman -S cpupower`
 
 `sudo cpupower frequency-set -g performance`
