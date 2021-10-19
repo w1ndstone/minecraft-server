@@ -4,13 +4,17 @@
 
 ### Бесплатные хостинги
 
-* [heroku](https://heroku.com) - подробный [гайд](https://www.youtube.com/watch?v=EBzkSDBmaoU&t=130s) по запуску сервера на данном хостинге.
-* [aternos](https://aternos.org/:ru/)
-* [minehut](https://minehut.com/)
+* [Heroku](https://heroku.com)
+
+подробный [гайд](https://www.youtube.com/watch?v=EBzkSDBmaoU&t=130s) по запуску сервера на данном хостинге.
+
+* [Aternos](https://aternos.org/:ru/)
+* [Minehut](https://minehut.com/)
 
 ### Платные хостинги
 
-
+* [Hostinger](https://www.hostinger.ru/vps-hosting-servera)
+* [RUVDS](https://ruvds.com/ru-rub)
 
 ### Собственный компьютер в качестве хоста
 
@@ -23,38 +27,11 @@
 
 **Но что делать, если у Вас серый айпи/провайдер блокирует порты?**
 
-Здесь есть три варианта - воспользоваться Ngrok, VPN (OpenVPN, HideMyName) или [IPv6](http://rubukkit.org/threads/ipv6-shag-v-buduschee-ili-obxodim-seryj-ip-bez-hamachi.35342/)
-
-С помощью ngrok: заходим на [данный сайт](https://ngrok.com/), регистрируемся и скачиваем программу, после чего заходим в личный кабинет, копируем authtoken, открываем сам ngrok и вставляем туда токен:
-
-`ngrok authtoken ваш токен`
-
-после чего вписываем
-
-`ngrok tcp -region eu 25565`
-
-и получаем наш айпи, по которому можно подключиться к серверу. (такого вида: 0.tcp.eu.ngrok.io:12345)
+Здесь есть три варианта - воспользоваться [Ngrok](https://ngrok.com/), VPN (OpenVPN, HideMyName) или [IPv6](http://rubukkit.org/threads/ipv6-shag-v-buduschee-ili-obxodim-seryj-ip-bez-hamachi.35342/)
 
 ### Буквенный IP
 
 Для этого Вам нужно получить свой домен, после чего на [cloudflare](https://www.cloudflare.com/ru-ru/) создать SRV запись.
-
-## Оптимизация операционной системы
-
-### Linux
-
-Linux CPU scaling 
-Some hosts might ship machines running in "PowerSave" mode. This can result in nearly 25% lower clock speeds and thus vastly lower single threaded performance. This can lead to severly worse performance than setting the CPU scaling to performance mode. Please note that this might be unavailable for VPS.
-
-For Debian / Ubuntu
-
-`cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor` Shows the CPU's performance profile.
-
-`echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor` Sets profile to performance.
-
-### Windows
-
-
 
 ## Java
 
@@ -64,18 +41,24 @@ For Debian / Ubuntu
 * [ZuluJDK](https://www.azul.com/downloads/?package=jdk)
 * [AmazonJDK](https://aws.amazon.com/ru/corretto/)
 
-You can find startup flags optimized for Minecraft servers [here](https://mcflags.emc.gs/) [`SOG`]. Keep in mind that this recommendation will not work on alternative jvm implementations.
+[JVM аргументы](https://mcflags.emc.gs/)
 
 ## Выбор ядра сервера
 
+Рекомендуемые ядра:
 * [Airplane](https://github.com/Technove/Airplane) - на сегодняшний день является одним из лучших в плане производительности и стабильности. Основано на Paper.
 * [Purpur](https://github.com/pl3xgaming/Purpur) - обеспечивает высокую производительность, имеет большое количество геймплейных изменений, удобную конфигурацию. Основано на Airplane.
-* [Paper](https://github.com/PaperMC/Paper) - одно из самых популярных ядер в Minecraft, обеспечивающее хорошую производительность.
-* [Spigot](https://getbukkit.org/download/spigot) - форк CraftBukkit с улучшенной производительностью. На сегодняшний день сильно уступает другим ядрам по производительности.
+* [Paper](https://github.com/PaperMC/Paper) - одно из самых популярных ядер в Minecraft, обеспечивающее неплохую производительность.
+* [SpongeForge]()
+
+Ядра, которые нужно обходить стороной:
+* [Spigot](https://getbukkit.org/download/spigot) - форк CraftBukkit с улучшенной производительностью. На сегодняшний день уступает другим ядрам по производительности.
 * [CraftBukkit](https://getbukkit.org/download/craftbukkit) - ванильное ядро с возможностью ставить плагины. На сегодняшний день сильно уступает другим ядрам по производительности.
-* [Yatopia](https://github.com/YatopiaMC/Yatopia) - форк огромного количества ядер. Крайне нестабильное ядро, не рекомендую использованию.
-* [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) - форк Paper, Tuinity, Airplane, Purpur и Yatopia. Не рекомендую к использованию.
-* [Patina](https://github.com/PatinaMC/Patina) - форк Yatopia. Не рекомендую к использованию.
+* [Yatopia](https://github.com/YatopiaMC/Yatopia) - форк огромного количества ядер. Крайне нестабильное ядро.
+* [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) - форк Paper, Tuinity, Airplane, Purpur и Yatopia.
+* [Patina](https://github.com/PatinaMC/Patina) - форк Yatopia.
+* [Mohist]() - нестабильное ядро.
+* [MCPC+]() - 
 
 ## Пре-генерация чанков
 
@@ -150,6 +133,44 @@ You can enable Purpur's alternate keepalive system so players with bad connectio
 
 -------------------------------------------------
 
+## Оптимизация операционной системы
+
+### Linux
+
+#### Использование демонов, повышающих производительность системы:
+* [Nohang](https://github.com/hakavlad/nohang)
+* [Ananicy](https://github.com/Nefelim4ag/Ananicy)
+
+#### Перевод процессора из энергосбережения в производительный режим:
+
+Debian/Ubuntu
+`cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`
+
+`echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor` Sets profile to performance.
+
+Arch
+`sudo pacman -S cpupower`
+
+`sudo cpupower frequency-set -g performance`
+
+`sudo nano /etc/systemd/system/cpupower.service`
+
+> [Unit]
+Description=Set CPU governor to performance
+
+> [Service]
+Type=oneshot
+ExecStart=/usr/bin/cpupower -c all frequency-set -g performance
+
+> [Install]
+WantedBy=multi-user.target
+
+`sudo systemctl enable cpupower.service`
+
+### Windows
+
+.
+
 # "Too good to be true" plugins
 
 ## Plugins removing ground items
@@ -178,15 +199,12 @@ To get timings of your server you just need to execute the `/timings paste` comm
 ## spark
 [Spark](https://github.com/lucko/spark) is a plugin that allows you to profile your servers CPU and memory usage. You can read on how to use it [on its wiki](https://spark.lucko.me/docs/). There's also a guide on how to find the cause of lag spikes [here](https://spark.lucko.me/docs/guides/Finding-lag-spikes).
 
-
-[`SOG`]: https://www.spigotmc.org/threads/guide-server-optimization%E2%9A%A1.283181/
-[server.properties]: https://minecraft.fandom.com/Server.properties
-[bukkit.yml]: https://bukkit.gamepedia.com/Bukkit.yml
-[spigot.yml]: https://www.spigotmc.org/wiki/spigot-configuration/
-[paper.yml]:  https://paper.readthedocs.io/en/latest/server/configuration.html
-[purpur.yml]: https://purpur.pl3x.net/docs
-[airplane.yml]: https://github.com/TECHNOVE/Airplane/wiki
-
+Источники:
+https://github.com/YouHaveTrouble/minecraft-optimization
+https://docs.google.com/document/d/1IjTxl7LaPKJyRoLpGEhm4ptBhob_jRgLLQpMugS7qe8/edit#
+.
+.
+.
 
 # Common pitfalls and best practices
 
