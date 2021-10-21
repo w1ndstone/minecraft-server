@@ -442,6 +442,42 @@ You can enable Purpur's alternate keepalive system so players with bad connectio
 > Enabling this sends a keepalive packet once per second to a player, and only kicks for timeout if none of them were responded to in 30 seconds. Responding to any of them in any order will keep the player connected. AKA, it won't kick your players because 1 packet gets dropped somewhere along the lines  
 ~ https://purpur.pl3x.net/docs/Configuration/#use-alternate-keepalive
 
+#### `dont-send-useless-entity-packets`
+
+> Оптимальным значением является `true`.
+
+Enabling this option will save you bandwidth by preventing the server from sending empty position change packets (by default the server sends this packet for each entity even if the entity hasn't moved). May cause some issues with plugins that use client-side entities.
+
+#### `aggressive-towards-villager-when-lagging`
+
+> Оптимальным значением является `false`.
+
+Enabling this will cause zombies to stop targeting villagers if the server is below the tps threshold set with lagging-threshold in purpur.yml.
+
+#### `entities-can-use-portals`
+
+> Оптимальным значением является `false`.
+
+This option can disable portal usage of all entities besides the player. This prevents entities from loading chunks by changing worlds which is handled on the main thread. This has the side effect of entities not being able to go through portals.
+
+#### `villager.brain-ticks`
+
+> Оптимальным значением является `2`.
+
+This option allows you to set how often (in ticks) villager brains (work and poi) will tick. Going higher than 3 is confirmed to make villagers inconsistent/buggy.
+
+#### `villager.lobotomize`
+
+> Оптимальным значением является `true`.
+
+Lobotomized villagers are stripped from their AI and only restock their offers every so often. Enabling this will lobotomize villagers that are unable to pathfind to their destination. Freeing them should unlobotomize them.
+
+#### `disable-treasure-searching`
+
+> Оптимальным значением является `true`.
+
+Prevents dolphins from performing structure search similar to treasure maps
+
 ## Оптимизация операционной системы
 
 ### Linux
@@ -517,26 +553,23 @@ https://docs.google.com/document/d/1IjTxl7LaPKJyRoLpGEhm4ptBhob_jRgLLQpMugS7qe8/
 .
 .
 
-# Common pitfalls and best practices
+## Полезные советы
 
-This article aims to explain common pitfalls that server owners face.
-
-## Always backup
+### Всегда делайте бэкапы
 There are two types of people - those who make backups, and those who will start making backups. It's just a matter of time when you experience data loss. Always make copies to avoid losing your worlds or plugin data. You can apply this to any computer related workflow, not just minecraft.
 
-## Don't use outdated software
+### Не используйте устаревшее ПО
 By running outdated software versions you risk players abusing unpatched exploits, including item duplication (infinite items). It also adds an inconvenience factor since your players have to specifically downgrade their client version to match your server. This can be circumvented by using a protocol hack, but it's not ideal.
 
-## Don't run Bukkit/Spigot anymore
+### Не используйте Spigot/Bukkit
 Bukkit and Spigot are basically in maintenance mode. They update anytime there's a new version and if a critical exploit is found, but don't add any performance updates. This means any performance issues you may experience on those softwares will never be improved over time. To avoid that, upgrade to [Paper](https://papermc.io/downloads), [Tuinity](https://ci.codemc.io/job/Spottedleaf/job/Tuinity) or [Purpur](https://purpur.pl3x.net/downloads). Bukkit/Spigot plugins will work just as well (maybe even better) with the server software listed. If they don't, then it's safe to assume that the plugin dev is either doing things that they shouldn't or did a negligent job creating their plugin. They also add optimization patches like a chunk loading system that can take advantage of multiple cpu threads or a setting that allows the server to tick less chunks than it actually sends to the player. See the [main optimization guide](https://github.com/YouHaveTrouble/minecraft-optimization) for more details.
 
-## Avoid shared hosting if possible
+### Избегайте shared-хостингов
 Shared hosts are usually the cheapest option, and that's for a valid reason. They offer you 2 types of resources - guaranteed and shared. Guaranteed resources are usually laughably low and may not be enough to run a server for a few players. Shared resources on the other hand are usually enough to run a server with decent performance. There is a catch, though; shared resources, like the name implies, are shared between your server and other servers on the same physical machine. Your server can only benefit from having them when no other server uses them. The situation where your server fully utilises shared resources is pretty much impossible to happen, as most shared hosts oversell their resources. Like airplane tickets, the hosting site sells more resources than they have available in hopes that not all of them will be used. This often leads to situations where all servers are bogged down because there aren't enough resources to spare.
 
-## Avoid datapacks that use command functions
+### Избегайте датапаки, использующие команды
 Datapacks that run commands are extremely laggy. It may not be much with a few players on, but that doesn't scale well with the playercount and will lag your server pretty quickly as you gain players. Datapacks that modify biomes, loot tables, etc are fine. You're better off looking for a plugin alternative.
 
-## Choosing hardware
-Don't just go off of how much RAM you need. You should instead focus on what kind of CPU you should use, since the CPU is the most important part of the server. You want something that [ranks good on single core performance](https://www.cpubenchmark.net/singleThread.html), as a server mainly runs on one thread. Multiple threads are utilised for quite some time now in systems like async chunk loading on paper, however.
+### Выбор железа
 
-You should absolutely avoid Hard Drives (HDDs). Their speeds are simply way too slow to justify running a server on them since minecraft is heavy on I/O operations (especially with high view distances and higher player counts). A Solid State drive (SSD) is a far better choice because of it's much faster I/O.
+Для начала определимся с платформой. У AMD актуальный на данный момент сокет - это AM4. Процессоры 1-го поколения (Ryzen 1000) на архитектуре Zen 1 и (Ryzen 1200/1600 версии AF) Zen 1+ имеют ужасную одноядерную производительность, высокое латенси (благодаря детдомовской шине данных Infinity Fabric, где её скорость передачи данных напрямую зависит от пропускной способности ОЗУ).
