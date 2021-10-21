@@ -242,7 +242,130 @@
 
 Данный параметр определяет расстояние в чанках вокруг игрока, которое будет прогружаться, но в котором ничего не будет происходить.
 
-> Оптимальным значением является `-1`.
+> Оптимальным значением является `12`.
+
+#### `delay-chunk-unloads-by`
+
+Определяет, через сколько выгрузится чанк, если в нем отсутствуют игроки.
+
+> Оптимальным значением является `10`.
+
+#### `max-auto-save-chunks-per-tick`
+
+> Оптимальным значением является `8`.
+
+#### `prevent-moving-into-unloaded-chunks`
+
+> Оптимальным значением является `true`.
+
+#### `entity-per-chunk-save-limit`
+
+> Оптимальными значениями являются
+
+> experience_orb: `16`
+
+> arrow: `16`
+
+> dragon_fireball: `3`
+
+> egg: `8`
+
+> ender_pearl: 8
+
+> eye_of_ender: 8
+
+> fireball: `8`
+
+> small_fireball: `8`
+
+> firework_rocket: `8`
+
+> potion: `8`
+
+> llama_spit: `3`
+
+> shulker_bullet: `8`
+
+> snowball: `8`
+
+> spectral_arrow: `16`
+
+> experience_bottle: `3`
+
+> trident: `16`
+
+> wither_skull: `4`
+
+> area_effect_cloud: `8`.
+
+#### `seed-based-feature-search-loads-chunks`
+
+> Оптимальным значением являются `true`.
+
+#### `despawn-ranges`
+
+> Оптимальным значениями являются
+
+> soft: `30`
+> hard: `56`.
+
+#### `per-player-mob-spawns`
+
+> Оптимальным значением является `true`.
+
+#### `max-entity-collisions`
+
+> Оптимальным значением является `2`.
+
+#### `update-pathfinding-on-block-update`
+
+> Оптимальным значением является `false`.
+
+#### `fix-climbing-bypassing-cramming-rule`
+
+> Оптимальным значением является `true`.
+
+#### `armor-stands-tick`
+
+> Оптимальным значением является `false`.
+
+#### `armor-stands-do-collision-entity-lookups`
+
+> Оптимальным значением является `false`.
+
+#### `tick-rates`
+
+> Оптимальными значениями являются
+
+> sensor: villager: secondarypoisensor: `80`
+
+> sensor: villager: nearestbedsensor: `80`
+
+> sensor: villager: villagerbabiessensor: `40`
+
+> sensor: villager: playersensor: `40`
+
+> sensor: villager: nearestlivingentitysensor: `40`
+
+> behavior: villager: validatenearbypoi: `60`
+
+> behavior: villager: acquirepoi: `120`.
+
+#### `alt-item-despawn-rate`
+
+каво блять
+
+#### `use-faster-eigencraft-redstone`
+
+> Оптимальным значением является `true`.
+
+#### `disable-move-event`
+
+> Оптимальным значением является `false`.
+
+#### `mob-spawner-tick-rate`
+
+> Оптимальным значением является `2`.
 
 #### `optimize-explosions`
 
@@ -250,11 +373,43 @@
 
 > Оптимальным значением является `true`.
 
+#### `enable-treasure-maps`
+
+> Оптимальным значением является `false`.
+
+#### `treasure-maps-return-already-discovered`
+
+> Оптимальным значением является `true`.
+
+#### `grass-spread-tick-rate`
+
+> Оптимальным значением является `4`.
+
+#### `container-update-tick-rate`
+
+> Оптимальным значением является `1`.
+
+#### `non-player-arrow-despawn-rate`
+
+> Оптимальным значением является `20`.
+
+#### `creative-arrow-despawn-rate`
+
+> Оптимальным значением является `20`.
+
 #### `anti-xray`
 
 Данный параметр скрывает руду от читеров, использующих X-Ray. Включение данной опции будет снижать производительность сервера, однако, оно все же эффективнее плагинов на anti-xray. В большинстве случаях влияние на производительность незначительная. Для детальной настройки посмотритe [рекомендуемые настройки Stonar96](https://gist.github.com/stonar96/ba18568bd91e5afd590e8038d14e245e)
 
 > Оптимальным значением является `true`.
+
+#### `remove-corrupt-tile-entities`
+
+> Оптимальным значением является `true`.
+
+#### `nether-ceiling-void-damage-height`
+
+> Оптимальным значением является `127`.
 
 ### [tuinity.yml](https://github.com/Tuinity/Tuinity/wiki/Config)
 
@@ -266,7 +421,17 @@
 
 ### [airplane.air](https://github.com/TECHNOVE/Airplane/wiki)
 
+#### `max-loads-per-projectile`
 
+> Оптимальным значением является `8`.
+
+#### `max-tick-freq`
+
+> Оптимальным значением является `20`.
+
+#### `activation-dist-mod` 
+
+> Оптимальным значением является `7`.
 
 ### [purpur.yml](https://purpur.pl3x.net/docs/)
 
