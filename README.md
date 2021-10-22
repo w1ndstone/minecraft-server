@@ -20,13 +20,13 @@
 
 * [Конфигурация файлов](#Конфигурация-файлов)
 
-    * [server.properties](#server-properties)
-    * [bukkit.yml](#bukkit-yml)
-    * [spigot.yml](#spigot-yml)
-    * [paper.yml](#paper-yml)
-    * [tuinity.yml](#tuinity-yml)
-    * [airplane.air](#airplane-air)
-    * [purpur.yml](#purpur-yml)
+    * server.properties
+    * bukkit.yml
+    * spigot.yml
+    * paper.yml
+    * tuinity.yml
+    * airplane.air
+    * purpur.yml
 
 * [Оптимизация операционной системы](#Оптимизация-операционной-системы)
 
