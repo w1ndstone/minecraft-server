@@ -518,33 +518,34 @@ WantedBy=multi-user.target
 
 #### Использование кастомного поверплана
 
-# "Too good to be true" plugins
+## Ненужные плагины
 
-## Plugins removing ground items
-Absolutely unnecessary since they can be replaced with [merge radius](#merge-radius) and [alt-item-despawn-rate](#alt-item-despawn-rate) and frankly, they're less configurable than basic server configs. They tend to use more resources scanning and removing items than not removing the items at all.
+### Плагины, удаляющие предметы через определенное кол-во времени
+Бесполезные плагины, поскольку в конфигурациях файлов сервера присутствуют такие параметры, как [merge radius](#merge-radius) и [alt-item-despawn-rate](#alt-item-despawn-rate), которые еще и настраиваются обширнее плагинов. Да и в случае с плагинами производительность будет хуже.
 
-## Mob stacker plugins
+### Mob stacker плагины
 
-It's really hard to justify using one. Stacking naturally spawned entities causes more lag than not stacking them at all due to the server constantly trying to spawn more mobs. The only "acceptable" use case is for spawners on servers with a large amount of spawners.
+Нет смысла. Они скорее уменьшат производительность, нежели её улучшат. Исключениями являются сервера с большим количеством спавнеров.
 
-## Plugins enabling/disabling other plugins
+### Плагины, включающие/выключащие другие плагины
 
-Anything that enables or disables plugins on runtime is extremely dangerous. Loading a plugin like that can cause fatal errors with tracking data and disabling a plugin can lead to errors due to removing dependency. The `/reload` command suffers from exact same issues and you can read more about them in [me4502's blog post](https://madelinemiller.dev/blog/problem-with-reload/)
+Плагин, включающий или отключающий другие плагины во время работы сервера, может вызвать фатальные ошибки. К слову, команда `/reload` страдает точно такими же проблемами, и Вы можете прочитать о них больше в [блоге me4502](https://madelinemiller.dev/blog/problem-with-reload/)
 
-# What's lagging? - measuring performance
+## Лаги
 
-## mspt
+### /mspt
 
-Paper offers a `/mspt` command that will tell you how much time the server took to calculate recent ticks. If the first and second value you see are lower than 50, then congratulations! Your server is not lagging! If the third value is over 50 then it means there was at least 1 tick that took longer. That's completely normal and happens from time to time, so don't panic.
+Ядро Paper добавляет новую команду `/mspt`, которая показывает Вам, сколько времени потребовалось серверу для вычисления последних тиков. Если Minimal и Average значения ниже 50, то это отлично. Если Maximum значение выше 50, то в этом нет ничего страшного, время от времени это случается.
 
-## timings
+### timings
 
-Great way to see what might be going on when your server is lagging are timings. Timings is a tool that lets you see exactly what tasks are taking the longest. It's the most basic troubleshooting tool and if you ask for help regarding lag you will most likely be asked for your timings.
+В ядре Airplane он по дефолту отключен, поскольку `To improve performance, timings have been disabled by default (т.е. он снижает производительность)`.
 
-To get timings of your server you just need to execute the `/timings paste` command and click the link you're provided with. You can share this link with other people to let them help you. It's also easy to misread if you don't know what you're doing. There is a detailed [video tutorial by Aikar](https://www.youtube.com/watch?v=T4J0A9l7bfQ) on how to read them.
+Но включить в принципе можно, я не думаю, что разница в производительность будет заметна. Он показывает задачи, на которые ушло больше всего времени. Чтобы узнать тайминги Вашего сервера, Вам просто нужно вписать команду `/timings paste` и щелкнуть по выданной ссылке. Вы также можете поделиться этой ссылкой с другими людьми, чтобы они могли Вам помочь. Существует подробный [туториал от Aikar] (https://www.youtube.com/watch?v=T4J0A9l7bfQ) о том, как их читать.
   
-## spark
-[Spark](https://github.com/lucko/spark) is a plugin that allows you to profile your servers CPU and memory usage. You can read on how to use it [on its wiki](https://spark.lucko.me/docs/). There's also a guide on how to find the cause of lag spikes [here](https://spark.lucko.me/docs/guides/Finding-lag-spikes).
+### spark
+
+[Spark](https://github.com/lucko/spark) - это плагин, показывающий использование CPU и ОЗУ. Вы можете посмотреть гайд, как его использовать на [его вики](https://spark.lucko.me/docs/). Также есть [гайд](https://spark.lucko.me/docs/guides/Finding-lag-spikes) по тому, как находить причину фризов, пролагов (кста, если у Вас возникают фризы, возможно у Вас райзен 1000/2000 с низкочастотной ОЗУ).
 
 Источники:
 https://github.com/YouHaveTrouble/minecraft-optimization
@@ -556,19 +557,23 @@ https://docs.google.com/document/d/1IjTxl7LaPKJyRoLpGEhm4ptBhob_jRgLLQpMugS7qe8/
 ## Полезные советы
 
 ### Всегда делайте бэкапы
-There are two types of people - those who make backups, and those who will start making backups. It's just a matter of time when you experience data loss. Always make copies to avoid losing your worlds or plugin data. You can apply this to any computer related workflow, not just minecraft.
+
+Всегда есть шанс потерять данные. Поэтому делайте бэкапы. Вы можете использовать для этого плагин [AutoBackup](https://www.spigotmc.org/resources/autobackup.88209/)
 
 ### Не используйте устаревшее ПО
-By running outdated software versions you risk players abusing unpatched exploits, including item duplication (infinite items). It also adds an inconvenience factor since your players have to specifically downgrade their client version to match your server. This can be circumvented by using a protocol hack, but it's not ideal.
+
+Запуская устаревшие версии программного обеспечения, Вы рискуете тем, что игроки будут злоупотреблять багами (включая различные дюпы предметов), эксплоитами. Это также добавляет некоторые неудобства, в виде того, что игрокам придется использовать устаревшие версии, чтобы смочь зайти на Ваш серверу. Этого, конечно же, можно избежать, используя ViaVersions, но там есть свои загвоздки.
 
 ### Не используйте Spigot/Bukkit
-Bukkit and Spigot are basically in maintenance mode. They update anytime there's a new version and if a critical exploit is found, but don't add any performance updates. This means any performance issues you may experience on those softwares will never be improved over time. To avoid that, upgrade to [Paper](https://papermc.io/downloads), [Tuinity](https://ci.codemc.io/job/Spottedleaf/job/Tuinity) or [Purpur](https://purpur.pl3x.net/downloads). Bukkit/Spigot plugins will work just as well (maybe even better) with the server software listed. If they don't, then it's safe to assume that the plugin dev is either doing things that they shouldn't or did a negligent job creating their plugin. They also add optimization patches like a chunk loading system that can take advantage of multiple cpu threads or a setting that allows the server to tick less chunks than it actually sends to the player. See the [main optimization guide](https://github.com/YouHaveTrouble/minecraft-optimization) for more details.
+CraftBukkit и Spigot в данный момент в своих обновлениях лишь исправляют критические ошибки, никак не улучшая производительность. Причем делают они это довольно таки долго.. Просто пересядьте на нормальные ядра в виде [Airplane](https://airplane.gg/) или [Purpur](https://purpur.pl3x.net/downloads). 
 
 ### Избегайте shared-хостингов
-Shared hosts are usually the cheapest option, and that's for a valid reason. They offer you 2 types of resources - guaranteed and shared. Guaranteed resources are usually laughably low and may not be enough to run a server for a few players. Shared resources on the other hand are usually enough to run a server with decent performance. There is a catch, though; shared resources, like the name implies, are shared between your server and other servers on the same physical machine. Your server can only benefit from having them when no other server uses them. The situation where your server fully utilises shared resources is pretty much impossible to happen, as most shared hosts oversell their resources. Like airplane tickets, the hosting site sells more resources than they have available in hopes that not all of them will be used. This often leads to situations where all servers are bogged down because there aren't enough resources to spare.
+
+Shared-хостинг - обычно самый дешевый вариант из хостингов, и на это есть веская причина. Они предлагают вам 2 типа ресурсов - гарантированные и общие. Гарантированных ресурсов обычно очень мало, и они могут не подходить под запуск сервера для нескольких игроков. А общие же ресурсы обычно достаточны для работы сервера с приличной производительностью. Однако есть загвоздка: общие ресурсы, как следует из названия, используются совместно вашим сервером и другими серверами на одной и той же физической машине. Ваш сервер может только выиграть от их наличия, если никакой другой сервер их не использует. Но ситуация, когда Ваш сервер полностью использует общие ресурсы, практически невозможна, поскольку большинство общих хостов перепродают свои ресурсы. Это аналогично тому, как авиакомпания продает билетов больше, чем доступно, в надежде, что не все из них будут использованы. Это часто приводит к ситуациям, когда все серверы зависают из-за нехватки ресурсов.
 
 ### Избегайте датапаки, использующие команды
-Datapacks that run commands are extremely laggy. It may not be much with a few players on, but that doesn't scale well with the playercount and will lag your server pretty quickly as you gain players. Datapacks that modify biomes, loot tables, etc are fine. You're better off looking for a plugin alternative.
+
+Датапаки, которые юзают команды, очень сильно снижают производительность сервера. Используйте только те датапаки, которые лишь модифицируют биомы, крафты и т.п.
 
 ### Выбор железа
 
