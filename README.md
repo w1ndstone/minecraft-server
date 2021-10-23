@@ -627,15 +627,15 @@ $ `sudo apt install linux-image-liquorix-amd64 linux-headers-liquorix-amd64`
 
 $ `sudo pacman -S linux-zen linux-zen-headers`
 
-> Обновление загрузчика. Для Artix, Manjaro, EndeavourOS, Garuda и прочих arch-based систем с ПРЕДУСТАНОВЛЕННЫМ AUR-пакетом "update-grub" можно использовать следующую команду:
+_Обновление загрузчика. Для Artix, Manjaro, EndeavourOS, Garuda и прочих arch-based систем с ПРЕДУСТАНОВЛЕННЫМ AUR-пакетом "update-grub" можно использовать следующую команду:_
 
 $ `sudo update-grub`
 
-> На Arch'е нужно использовать либо
+_На Arch'е нужно использовать либо:_
 
 $ `sudo grub-mkconfig -o /boot/grub/grub.cfg`
 
-> либо поставить AUR-пакет "update-grub" и использовать его.
+_либо поставить AUR-пакет "update-grub" и использовать его._
 
 $ `yay -S update-grub`
 
