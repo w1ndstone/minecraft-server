@@ -507,7 +507,11 @@ Prevents dolphins from performing structure search similar to treasure maps
 
 #### Desktop Environment (Графическая оболочка)
 
-Желательно использовать XFCE, LXDE, LXQT.
+Рекомендуемые:
+
+* XFCE 
+* LXQT 
+* LXDE
 
 #### Post-install
 
@@ -530,6 +534,12 @@ $ `git clone https://aur.archlinux.org/yay.git`
 $ `cd yay`
 
 $ `makepkg -si`
+
+OpenSUSE
+
+Clear Linux
+
+CentOS
 
 #### Использование демонов, повышающих производительность системы
 
