@@ -505,25 +505,103 @@ Prevents dolphins from performing structure search similar to treasure maps
 
 ### Linux
 
-#### Использование демонов, повышающих производительность системы
-* [Nohang](https://github.com/hakavlad/nohang)
-* [Ananicy](https://github.com/Nefelim4ag/Ananicy)
+#### Desktop Environment (Графическая оболочка)
 
-#### Перевод процессора из энергосбережения в производительный режим
+Желательно использовать XFCE, LXDE, LXQT.
 
-Debian/Ubuntu
+#### Post-install
 
-`cat /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor`
+Debian
 
-`echo "performance" | sudo tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor` Sets profile to performance.
+$ `sudo apt-get update`
+
+$ `sudo apt-get install git`
+
+$ `sudo apt-get install curl`
 
 Arch
 
-`sudo pacman -S cpupower`
+$ `sudo pacman -Syyu`
 
-`sudo cpupower frequency-set -g performance`
+$ `sudo pacman -S base-devel`
 
-`sudo nano /etc/systemd/system/cpupower.service`
+$ `git clone https://aur.archlinux.org/yay.git`
+
+$ `cd yay`
+
+$ `makepkg -si`
+
+#### Использование демонов, повышающих производительность системы
+
+* [Nohang](https://github.com/hakavlad/nohang)
+
+Debian
+
+$ `sudo apt-get install nohang`
+
+$ `sudo systemctl enable nohang`
+
+$ `sudo systemctl start nohang`
+
+Arch
+
+$ `yay -S nohang`
+
+$ `sudo systemctl enable nohang`
+
+$ `sudo systemctl start nohang`
+
+* [Ananicy](https://github.com/Nefelim4ag/Ananicy)
+
+Debian
+
+$ `git clone https://github.com/Nefelim4ag/Ananicy.git`
+
+$ `cd /tmp/ananicy`
+
+$ `sudo make install`
+
+$ `sudo systemctl enable ananicy`
+
+$ `sudo systemctl start ananicy`
+
+Arch
+
+$ `yay -S ananicy`
+
+$ `sudo systemctl enable ananicy`
+
+$ `sudo systemctl start ananicy`
+
+#### Перевод процессора из энергосбережения в производительный режим
+
+Debian
+
+$ `sudo apt-get install linux-cpupower`
+
+$ `sudo cpupower frequency-set -g performance`
+
+$ `sudo nano /etc/systemd/system/cpupower.service`
+
+> [Unit]
+Description=Set CPU governor to performance
+
+> [Service]
+Type=oneshot
+ExecStart=/usr/bin/cpupower -c all frequency-set -g performance
+
+> [Install]
+WantedBy=multi-user.target
+
+$ `sudo systemctl enable cpupower.service`
+
+Arch
+
+$ `sudo pacman -S cpupower`
+
+$ `sudo cpupower frequency-set -g performance`
+
+$ `sudo nano /etc/systemd/system/cpupower.service`
 
 > [Unit]
 Description=Set CPU governor to performance
@@ -536,6 +614,32 @@ ExecStart=/usr/bin/cpupower -c all frequency-set -g performance
 WantedBy=multi-user.target
 
 `sudo systemctl enable cpupower.service`
+
+#### Использование кастомного ядра
+
+Liquorix ядро для Debian'а
+
+$ `curl 'https://liquorix.net/add-liquorix-repo.sh' | sudo bash`
+
+$ `sudo apt install linux-image-liquorix-amd64 linux-headers-liquorix-amd64`
+
+Ядро Zen для Arch'а
+
+$ `sudo pacman -S linux-zen linux-zen-headers`
+
+> Обновление загрузчика. Для Artix, Manjaro, EndeavourOS, Garuda и прочих arch-based систем с ПРЕДУСТАНОВЛЕННЫМ AUR-пакетом "update-grub" можно использовать следующую команду:
+
+$ `sudo update-grub`
+
+> На Arch'е нужно использовать либо
+
+$ `sudo grub-mkconfig -o /boot/grub/grub.cfg`
+
+> либо поставить AUR-пакет "update-grub" и использовать его.
+
+$ `yay -S update-grub`
+
+$ `sudo update-grub`
 
 ### Windows
 
