@@ -76,6 +76,7 @@
 
 Присутствует бесплатная пробная версия. Даются 200$ на 1 месяц для того, чтобы потратить их на виртуальную машину. За 132$ есть вариант с 4 ядрами, 16GB DDR4 и SSD на 128GB/HDD на 1TB. Оставшиеся деньги можете потратить на еще одну виртуальную машину или прочие штуки (домен, к примеру).
 
+* [DigitalOcean](https://www.digitalocean.com/products/droplets/)
 * [Hostinger](https://www.hostinger.ru/vps-hosting-servera)
 * [RUVDS](https://ruvds.com/ru-rub)
 
