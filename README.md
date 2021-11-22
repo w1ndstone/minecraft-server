@@ -36,7 +36,8 @@
         * [Post-install](#Post-install)
         * [Использование демонов, повышающих производительность системы](#Использование-демонов-повышающих-производительность-системы)
         * [Перевод процессора из энергосбережения в производительный режим](#Перевод-процессора-из-энергосбережения-в-производительный-режим)
-
+        * [Использование кастомного ядра](#Использование-кастомного-ядра)
+        
     * [Windows](#Windows)
 
         * [Использование кастомного поверплана](#Использование-кастомного-поверплана)
@@ -69,6 +70,10 @@
 
 ### Бесплатные хостинги
 
+* [PloudOS](https://ploudos.com/en/)
+
+Лучший из бесплатных хостингов. Никакой очереди. Поддерживает такие ядра, как Purpur и Tuinity. Позволяет ставить свои плагины, свои моды, свои карты.
+
 * [Heroku](https://heroku.com)
 
 Подробный [гайд](https://www.youtube.com/watch?v=EBzkSDBmaoU&t=130s) по запуску сервера на данном хостинге. 1.16.4 не потянет, даже не пытайтесь.
@@ -93,13 +98,13 @@
 
 * Создать и запустить сервер;
 
-> Всё просто - Вам нужно установить JDK (желательно версии 16 или 17), скачать желаемое ядро сервера, создать папку, перекинуть ядро в неё, запустить ядро, принять пользовательское соглашение (в EULA.txt изменить EULA=false на EULA=true), снова запустить ядро, после чего сервер будет запущен.
+> Всё просто - Вам нужно установить JDK (желательно версии 16 или 17), скачать желаемое ядро сервера, создать папку, перекинуть ядро в неё, запустить ядро, принять пользовательское соглашение (в EULA.txt изменить EULA=false на EULA=true), снова запустить ядро, после чего сервер будет запущен. Далее Вам понадобится создать файл расширения .bat для Windows или .sh для Linux, чтобы можно было запускать сервер с помощью определенных аргументов Java, а также, чтобы можно было взаимодействовать с консолью. В этот файл Вы вписываете флаги из [Аргументы запуска Java](#Аргументы-запуска-java) и сохраняете, теперь Вы можете запускать с помощью него сервер.
 
 * Пробросить порты;
 
-> Для проброса портов необходим белый IP или отсутствие блокировки портов NAT. Пробросить порты по протоколу TCP можно через настройки роутера и даже торрент-клиент.
+> Для проброса портов необходим белый IP. Пробросить порты по протоколу TCP можно через настройки роутера и/или брандмауэр.
 
-> В случае, если имеется только NAT-овский айпи с блокировкой портов можно воспользоваться [Ngrok](https://ngrok.com/), [OpenVPN](https://openvpn.net/)/[NordVPN](https://nordvpn.com/ru/), [SSH Tunnel](https://superuser.com/questions/231751/how-to-tunnel-port-25565-through-ssh), [IPv6 Port Forwarding](http://rubukkit.org/threads/ipv6-shag-v-buduschee-ili-obxodim-seryj-ip-bez-hamachi.35342/), ну или же попросить услугу Статического IP без блокировки портов у провайдера. Для счастливых обладателей роутеров Keenetic есть вариант [KeenDNS](https://help.keenetic.com/hc/ru/articles/360000400919-%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%81-%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D1%85-%D0%B8%D0%BC%D0%B5%D0%BD-KeenDNS) с использованием облачного IPv4.
+> В случае, если имеется только NAT-овский айпи с блокировкой портов можно воспользоваться [Ngrok](https://ngrok.com/), [PortMap](https://portmap.io/), [LocalTunnel](https://localtunnel.github.io/www/), [различными VPN с возможностью открывать порты (Private Internet Access)](https://openvpn.net/), [IPv6 Port Forwarding](http://rubukkit.org/threads/ipv6-shag-v-buduschee-ili-obxodim-seryj-ip-bez-hamachi.35342/), ну или же попросить услугу Публичного Статического IP без блокировки портов у провайдера. Для счастливых обладателей роутеров Keenetic есть вариант [KeenDNS](https://help.keenetic.com/hc/ru/articles/360000400919-%D0%A1%D0%B5%D1%80%D0%B2%D0%B8%D1%81-%D0%B4%D0%BE%D0%BC%D0%B5%D0%BD%D0%BD%D1%8B%D1%85-%D0%B8%D0%BC%D0%B5%D0%BD-KeenDNS) с использованием облачного IPv4. Также можете попробовать взять дешевый VPS за пару десятков рублей в месяц с выделенным IPv4, после чего поднять на нём VPN сервер (к примеру, OpenVPN Server).
 
 * Доменный адрес (по желанию);
 
@@ -119,6 +124,8 @@
 
 ### Аргументы запуска Java
 
+Немаловажным шагом в настройке сервера является оптимизация аргументов запуска Java. По ссылке ниже Вы сможете найти оптимальные флаги.
+
 [Оптимизация аргументов запуска сервера от hilltty](https://github.com/hilltty/hilltty-flags)
 
 ## Выбор ядра сервера
@@ -127,8 +134,8 @@
 
 1.16+:
 
-* [Purpur](https://github.com/pl3xgaming/Purpur) - обеспечивает производительность на уровне Airplane, имеет большое количество геймплейных изменений, продвинутую конфигурацию. Форк Airplane.
 * [Airplane](https://github.com/Technove/Airplane) - на сегодняшний день является одним из лучших в плане производительности и стабильности. Форк Paper.
+* [Purpur](https://github.com/pl3xgaming/Purpur) - обеспечивает производительность на уровне Airplane, имеет большое количество геймплейных изменений, продвинутую конфигурацию. Форк Airplane.
 * [Paper](https://github.com/PaperMC/Paper) - одно из самых популярных ядер в Minecraft, обеспечивающее неплохую производительность. Форк Spigot.
 
 1.8+:
@@ -149,7 +156,7 @@
 
 ## Выбор прокси-сервера
 
-Ядра, которые представляют из себя прокси-сервер позволяют объединять несколько серверов Minecraft в один с возможностью быстрого переключения игроков между ними.
+Ядра, представляющие из себя прокси-сервер, позволяют объединять несколько серверов Minecraft в один с возможностью быстрого переключения игроков между ними.
 
 Рекомендуемые ядра:
 
@@ -623,9 +630,7 @@ Debian
 
 $ `sudo apt-get update`
 
-$ `sudo apt-get install git`
-
-$ `sudo apt-get install curl`
+$ `sudo apt-get install git curl make fakeroot`
 
 Arch
 
@@ -641,13 +646,15 @@ $ `makepkg -si`
 
 OpenSUSE
 
-$ здесь обязательно что-то будет
-
-Clear Linux
+$ `здесь обязательно что-то будет`
 
 CentOS
 
+$ `и здесь тоже`
+
 Fedora
+
+$ `и тут`
 
 #### Использование демонов, повышающих производительность системы
 
@@ -655,7 +662,11 @@ Fedora
 
 Debian
 
-$ `sudo apt-get install nohang`
+$ `git clone https://github.com/hakavlad/nohang.git`
+
+$ `cd nohang`
+
+$ `sudo make install`
 
 $ `sudo systemctl enable nohang`
 
@@ -669,13 +680,19 @@ $ `sudo systemctl enable nohang`
 
 $ `sudo systemctl start nohang`
 
+Fedora
+
+$ `sudo dnf install nohang-desktop`
+
+$ `sudo systemctl enable --now nohang-desktop.service`
+
 * [Ananicy](https://github.com/Nefelim4ag/Ananicy)
 
 Debian
 
 $ `git clone https://github.com/Nefelim4ag/Ananicy.git`
 
-$ `cd /tmp/ananicy`
+$ `cd Ananicy`
 
 $ `sudo make install`
 
@@ -740,6 +757,8 @@ $ `sudo systemctl enable cpupower.service`
 $ `curl 'https://liquorix.net/add-liquorix-repo.sh' | sudo bash`
 
 $ `sudo apt install linux-image-liquorix-amd64 linux-headers-liquorix-amd64`
+
+$ `sudo grub-mkconfig -o /boot/grub/grub.cfg`
 
 Ядро Zen для Arch'а
 
@@ -831,7 +850,7 @@ Shared-хостинг - обычно самый дешевый вариант и
 
 Теперь нужно выбрать накопители.
 
-Сервер лучше всего держать на SSD (Samsung 870 EVO, Kingston KC600, Crucial BX500) диске, желательно NVMe (WD Black SN850, Samsung 980 PRO, Samsung 980, SiliconPower P34A80, Kingston A2000, Kingston NV1 500GB).
+Сервер лучше всего держать на SSD (Samsung 870 EVO/Kingston KC600/Crucial BX500) диске, желательно NVMe (WD Black SN850/Samsung 980 PRO/Samsung 980/SiliconPower P34A80/Kingston A2000/Kingston NV1 500GB).
 
 # Источники информации
 
