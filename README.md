@@ -72,7 +72,7 @@
 
 * [PloudOS](https://ploudos.com/en/)
 
-Лучший из бесплатных хостингов. Никакой очереди. Поддерживает такие ядра, как Purpur и Tuinity. Позволяет ставить свои плагины, свои моды, свои карты.
+Лучший из бесплатных хостингов. Поддерживает такие ядра, как Paper, Purpur и Tuinity. Позволяет ставить свои плагины, свои моды, свои карты.
 
 * [Heroku](https://heroku.com)
 
@@ -132,15 +132,23 @@
 
 Рекомендуемые ядра:
 
+1.18+:
+
+* [Pufferfish]()
+* [Purpur]()
+* [Paper]()
+
 1.16+:
 
+* [Pufferfish](https://github.com/pufferfish-gg/Pufferfish)
 * [Airplane](https://github.com/Technove/Airplane) - на сегодняшний день является одним из лучших в плане производительности и стабильности. Форк Paper.
 * [Purpur](https://github.com/pl3xgaming/Purpur) - обеспечивает производительность на уровне Airplane, имеет большое количество геймплейных изменений, продвинутую конфигурацию. Форк Airplane.
 * [Paper](https://github.com/PaperMC/Paper) - одно из самых популярных ядер в Minecraft, обеспечивающее неплохую производительность. Форк Spigot.
 
 1.8+:
 
-* [TacoSpigot](https://github.com/TacoSpigot/TacoSpigot) - отлично подходит под сервера с мини-играми, имеет более лучшую производительность в сравнении с Paper.
+* [SportPaper]()
+* [NachoSpigot](https://github.com/TacoSpigot/TacoSpigot) - отлично подходит под сервера с мини-играми, имеет более лучшую производительность в сравнении с Paper.
 * [Paper](https://github.com/PaperMC/Paper)
 * [SpongeForge](https://www.spongepowered.org/downloads/spongeforge/stable/1.12.2) - ядро для тех, кто хочет использовать плагины Sponge и моды Forge вместе.
 
@@ -149,10 +157,12 @@
 * [Spigot](https://getbukkit.org/download/spigot) - форк CraftBukkit с улучшенной производительностью. На сегодняшний день уступает другим ядрам по производительности.
 * [CraftBukkit](https://getbukkit.org/download/craftbukkit) - дефолтное ядро с возможностью ставить плагины. На сегодняшний день сильно уступает другим ядрам по производительности.
 * [Yatopia](https://github.com/YatopiaMC/Yatopia) - свалка патчей со множества ядер. Крайне нестабильное ядро.
-* [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) - форк Yatopia.
-* [Patina](https://github.com/PatinaMC/Patina) - форк Yatopia.
-* [Mohist]() - нестабильное ядро.
-* [MCPC+]() - нестабильное ядро.
+* [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) - Yatopia 2.0.
+* [Patina](https://github.com/PatinaMC/Patina) - Yatopia 2.0.
+* [Mohist](https://mohistmc.com/) - нестабильное ядро.
+* [MCPC+](https://ru-minecraft.ru/plaginy-minecraft/10408-147-mcpc-ogranicheniy-v-modah-dlya-bukkita-bolshe-net.html) - нестабильное ядро.
+* [CatServer](https://github.com/Luohuayu/CatServer) - Mohist 2.0
+* []()
 
 ## Выбор прокси-сервера
 
@@ -160,6 +170,7 @@
 
 Рекомендуемые ядра:
 
+* [Velocity](https://velocitypowered.com/) - аналог BungeeCord с прекрасной стабильностью, невероятной производительностью и быстрыми фиксами багов/эксплоитов.
 * [FlameCord](https://github.com/2lstudios-mc/FlameCord) - форк WaterFall с фиксом множества эксплоитов и поддержкой версии 1.7
 * [Travertine](https://github.com/PaperMC/Travertine) - форк WaterFall с небольшими изменениями и поддержкой версии 1.7.
 
