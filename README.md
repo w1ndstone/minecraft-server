@@ -27,7 +27,9 @@
     * [tuinity.yml](#tuinityyml)
     * [airplane.yml](#airplaneyml)
     * [purpur.yml](#purpuryml)
-
+    * [config.yml](#configyml)
+    * [waterfall.yml](#waterfallyml)
+    * [velocity.toml](#velocitytoml)
 * [Оптимизация операционной системы](#Оптимизация-операционной-системы)
 
     * [Linux](#Linux)
@@ -41,7 +43,6 @@
     * [Windows](#Windows)
 
         * [Использование кастомного поверплана](#Использование-кастомного-поверплана)
-        * [](#)
 
 * [Плагины](#Плагины)
 
@@ -114,7 +115,7 @@
 
 ## Java
 
-Для версии 1.16 или выше нужен JDK версии 16 или выше.
+Для версии 1.17 или выше нужен JDK версии 16 или выше.
 
 Рекомендуемые JDK:
 
@@ -124,7 +125,7 @@
 
 ### Аргументы запуска Java
 
-Немаловажным шагом в настройке сервера является оптимизация аргументов запуска Java. По ссылке ниже Вы сможете найти оптимальные флаги.
+Немаловажным шагом в настройке сервера является оптимизация аргументов запуска Java. По ссылке ниже Вы сможете найти оптимальные флаги для Вашего сервера.
 
 [Оптимизация аргументов запуска сервера от hilltty](https://github.com/hilltty/hilltty-flags)
 
@@ -134,21 +135,21 @@
 
 1.18+:
 
-* [Pufferfish]()
-* [Purpur]()
-* [Paper]()
+* [Pufferfish](https://github.com/pufferfish-gg/Pufferfish)
+* [Purpur](https://github.com/pl3xgaming/Purpur)
+* [Paper](https://github.com/PaperMC/Paper)
 
 1.16+:
 
-* [Pufferfish](https://github.com/pufferfish-gg/Pufferfish)
-* [Airplane](https://github.com/Technove/Airplane) - на сегодняшний день является одним из лучших в плане производительности и стабильности. Форк Paper.
+* [Pufferfish](https://github.com/pufferfish-gg/Pufferfish) - самое производительное ядро на сегодняшний день. 1.17+
+* [Airplane](https://github.com/Technove/Airplane) - является одним из лучших в плане производительности и стабильности. Форк Paper. К сожалению, обновляться данное ядро на 1.18 не будет.
 * [Purpur](https://github.com/pl3xgaming/Purpur) - обеспечивает производительность на уровне Airplane, имеет большое количество геймплейных изменений, продвинутую конфигурацию. Форк Airplane.
 * [Paper](https://github.com/PaperMC/Paper) - одно из самых популярных ядер в Minecraft, обеспечивающее неплохую производительность. Форк Spigot.
 
 1.8+:
 
-* [SportPaper]()
-* [NachoSpigot](https://github.com/TacoSpigot/TacoSpigot) - отлично подходит под сервера с мини-играми, имеет более лучшую производительность в сравнении с Paper.
+* [SportPaper](https://github.com/Electroid/SportPaper)
+* [NachoSpigot](https://github.com/CobbleSword/NachoSpigot) - отлично подходит под сервера с мини-играми, имеет более лучшую производительность в сравнении с Paper.
 * [Paper](https://github.com/PaperMC/Paper)
 * [SpongeForge](https://www.spongepowered.org/downloads/spongeforge/stable/1.12.2) - ядро для тех, кто хочет использовать плагины Sponge и моды Forge вместе.
 
@@ -622,6 +623,12 @@
 Позволяет телепортировать игрока к спавну сервера, если он находится за пределами границы мира, поскольку границу ванильного мира можно обойти, а урона, наносимого границей может не хватить для убийства игрока.
 
 > Оптимальным значением является `true`.
+
+### config.yml
+
+### flamecord.yml
+
+### velocity.toml
 
 ## Оптимизация операционной системы
 
