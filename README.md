@@ -1,5 +1,7 @@
 # Гайд по созданию и настройке сервера Minecraft
 
+Основан на [данном гайде](https://github.com/YouHaveTrouble/minecraft-optimization).
+
 ## Содержание
 
 * [Хостинг](#Хостинг)
@@ -27,28 +29,28 @@
     * [tuinity.yml](#tuinityyml)
     * [airplane.yml](#airplaneyml)
     * [purpur.yml](#purpuryml)
+    * [pufferfish.yml](#pufferfishyml)
     * [config.yml](#configyml)
     * [waterfall.yml](#waterfallyml)
     * [velocity.toml](#velocitytoml)
-* [Оптимизация операционной системы](#Оптимизация-операционной-системы)
+
+* [Работа в операционной системе](#Работа-в-операционной-системе)
 
     * [Linux](#Linux)
 
-        * [Desktop Environment](#Desktop-Environment)
-        * [Post-install](#Post-install)
+        * [Действия после установки системы](#Действия-после-установки-системы)
+        * [Загрузка ядра сервера](#Загрузка-ядра-сервера)
+        * [Создание бэкапов и их загрузка на облако](#Создание-бэкапов-и-их-загрузка-на-облако)
         * [Использование демонов, повышающих производительность системы](#Использование-демонов-повышающих-производительность-системы)
         * [Перевод процессора из энергосбережения в производительный режим](#Перевод-процессора-из-энергосбережения-в-производительный-режим)
-        * [Использование кастомного ядра](#Использование-кастомного-ядра)
-        
-    * [Windows](#Windows)
 
-        * [Использование кастомного поверплана](#Использование-кастомного-поверплана)
+* [Слишком хорошие плагины и моды, чтобы быть правдой](#Слишком-хорошие-плагины-и-моды-чтобы-быть-правдой)
 
-* [Плагины](#Плагины)
-
-    * [Удаляющие предметы через определенное количество времени](#Удаляющие-предметы-через-определенное-кол-во-времени)
-    * [Моб-стакеры](#Моб-стакеры)
-    * [Включающие или выключащие другие плагины](#Включающие-или-выключащие-другие-плагины)
+    * [Плагины для удаления предметов через определенное количество времени](#Удаляющие-предметы-через-определенное-кол-во-времени)
+    * [Плагины моб-стакеры](#Моб-стакеры)
+    * [Плагины для включения или выключения других плагинов](#Включающие-или-выключащие-другие-плагины)
+    * [Плагины для автоматических бэкапов](#Плагины-для-автоматических-бэкапов)
+    * [Моды, добавляющие поддержку Bukkit API для Fabric или Forge](#Моды-добавляющие-поддержку-Bukkit-API-для-Fabric-или-Forge)
 
 * [Мониторинг сервера](#Мониторинг-сервера)
 
@@ -99,7 +101,7 @@
 
 * Создать и запустить сервер;
 
-> Всё просто - Вам нужно установить JDK (желательно версии 16 или 17), скачать желаемое ядро сервера, создать папку, перекинуть ядро в неё, запустить ядро, принять пользовательское соглашение (в EULA.txt изменить EULA=false на EULA=true), снова запустить ядро, после чего сервер будет запущен. Далее Вам понадобится создать файл расширения .bat для Windows или .sh для Linux, чтобы можно было запускать сервер с помощью определенных аргументов Java, а также, чтобы можно было взаимодействовать с консолью. В этот файл Вы вписываете флаги из [Аргументы запуска Java](#Аргументы-запуска-java) и сохраняете, теперь Вы можете запускать с помощью него сервер.
+> Вам нужно установить JDK, скачать ядро и на его основе создать сервер. Более подробная инструкция по созданию будет в пункте [Работа в операционной системе](#Работа-в-операционной-системе).
 
 * Пробросить порты;
 
@@ -133,25 +135,13 @@
 
 Рекомендуемые ядра:
 
-1.18+:
-
-* [Pufferfish](https://github.com/pufferfish-gg/Pufferfish)
-* [Purpur](https://github.com/pl3xgaming/Purpur)
-* [Paper](https://github.com/PaperMC/Paper)
-
-1.16+:
-
-* [Pufferfish](https://github.com/pufferfish-gg/Pufferfish) - самое производительное ядро на сегодняшний день. 1.17+
-* [Airplane](https://github.com/Technove/Airplane) - является одним из лучших в плане производительности и стабильности. Форк Paper. К сожалению, обновляться данное ядро на 1.18 не будет.
-* [Purpur](https://github.com/pl3xgaming/Purpur) - обеспечивает производительность на уровне Airplane, имеет большое количество геймплейных изменений, продвинутую конфигурацию. Форк Airplane.
-* [Paper](https://github.com/PaperMC/Paper) - одно из самых популярных ядер в Minecraft, обеспечивающее неплохую производительность. Форк Spigot.
-
-1.8+:
-
-* [SportPaper](https://github.com/Electroid/SportPaper)
-* [NachoSpigot](https://github.com/CobbleSword/NachoSpigot) - отлично подходит под сервера с мини-играми, имеет более лучшую производительность в сравнении с Paper.
-* [Paper](https://github.com/PaperMC/Paper)
-* [SpongeForge](https://www.spongepowered.org/downloads/spongeforge/stable/1.12.2) - ядро для тех, кто хочет использовать плагины Sponge и моды Forge вместе.
+* [Pufferfish](https://github.com/pufferfish-gg/Pufferfish) - самое производительное ядро на сегодняшний день. 1.17+.
+* [Airplane](https://github.com/Technove/Airplane) - является одним из лучших в плане производительности и стабильности. Форк Paper. К сожалению, обновляться данное ядро доступно лишь на 1.16-1.17 версиях.
+* [Purpur](https://github.com/pl3xgaming/Purpur) - обеспечивает производительность на уровне Airplane, имеет большое количество геймплейных изменений, продвинутую конфигурацию. Форк Airplane. 1.14+.
+* [Paper](https://github.com/PaperMC/Paper) - одно из самых популярных ядер в Minecraft, обеспечивающее неплохую производительность. Форк Spigot. 1.8.8+.
+* [SportPaper](https://github.com/Electroid/SportPaper) - отлично подходит под сервера с мини-играми, имеет более лучшую производительность в сравнении с Paper 1.8.9. 1.8.9.
+* [NachoSpigot](https://github.com/CobbleSword/NachoSpigot) - отлично подходит под сервера с мини-играми, имеет более лучшую производительность в сравнении с Paper 1.8.9. Форк TacoSpigot. 1.8.9.
+* [SpongeForge](https://www.spongepowered.org/downloads/spongeforge/stable/1.12.2) - ядро для тех, кто хочет использовать плагины Sponge и моды Forge вместе. 1.12.2.
 
 Ядра, которые нужно обходить стороной:
 
@@ -162,22 +152,21 @@
 * [Patina](https://github.com/PatinaMC/Patina) - Yatopia 2.0.
 * [Mohist](https://mohistmc.com/) - нестабильное ядро.
 * [MCPC+](https://ru-minecraft.ru/plaginy-minecraft/10408-147-mcpc-ogranicheniy-v-modah-dlya-bukkita-bolshe-net.html) - нестабильное ядро.
-* [CatServer](https://github.com/Luohuayu/CatServer) - Mohist 2.0
-* []()
+* [CatServer](https://github.com/Luohuayu/CatServer) - Mohist 2.0.
+* [Magma](https://github.com/magmafoundation/Magma) - Mohist 2.0.
 
 ## Выбор прокси-сервера
 
-Ядра, представляющие из себя прокси-сервер, позволяют объединять несколько серверов Minecraft в один с возможностью быстрого переключения игроков между ними.
+Ядра, представляющие из себя прокси-сервер, позволяют объединять несколько серверов Minecraft в один с возможностью быстрого переключения игроков между ними посредством команды `/server <сервер>`.
 
 Рекомендуемые ядра:
 
 * [Velocity](https://velocitypowered.com/) - аналог BungeeCord с прекрасной стабильностью, невероятной производительностью и быстрыми фиксами багов/эксплоитов.
-* [FlameCord](https://github.com/2lstudios-mc/FlameCord) - форк WaterFall с фиксом множества эксплоитов и поддержкой версии 1.7
-* [Travertine](https://github.com/PaperMC/Travertine) - форк WaterFall с небольшими изменениями и поддержкой версии 1.7.
+* [Waterfall](https://github.com/PaperMC/Waterfall/) - форк BungeeCord со множеством изменений.
 
 ## Пре-генерация чанков
 
-Предварительная генерация чанков - один из важнейших шагов в улучшении производительности сервера. Во время перемещения по миру постоянно генерируются новые чанки, которые создают существенную нагрузку на сервер, и обычно на слабых ПК это влечет за собой низкий TPS.
+Предварительная генерация чанков - один из важнейших шагов в улучшении производительности сервера. Во время перемещения по миру постоянно генерируются новые чанки, которые создают нагрузку на сервер, и обычно на слабых ПК это влечет за собой низкую скорость прогрузки чанков.
 
 Предварительно прогрузить чанки можно следующим плагином:
 
@@ -185,43 +174,41 @@
 
 ## Конфигурация файлов
 
+**Ядра сервера**
+
 ### [server.properties](https://minecraft.fandom.com/Server.properties)
 
-#### `network-compression-threshold`
+#### `view-distance`
 
-Ограничивает размер пакета до того, как сервер попытается его сжать. Установка более высокого значения может сэкономить некоторые ресурсы процессора, а установка значения `-1` отключает его. Не рекомендуется ставить значение ниже `64` и выше `1480`.
-
-> Оптимальным значением является `512`. Если Ваш сервер является локальным, то лучше отключить данный параметр.
-
-#### `allow-nether`
-
-Определяет, будет ли включен ад.
-
-> Если Вам данное измерение не нужно, можете смело ставить `false`.
+#### `simulate-distance`
 
 ### [bukkit.yml](https://bukkit.gamepedia.com/Bukkit.yml)
-
-#### `allow-end`
-
-Определяет, будет ли включено измерение края. 
-
-> Если Вам данное измерение не нужно, можете смело ставить `false`.
 
 #### `spawn-limits`
 
 Ограничивает количество мобов на всём сервере. (Если включить [per-player-mob-spawns](#per-player-mob-spawns) в paper.yml, то будет ограничивать кол-во мобов для каждого игрока).
 
+В группу `monsters` входят `blaze`, `cave_spider`, `creeper`, `drowned`, `elder_guardian`, `ender_dragon`, `enderman`, `endermite`, `evoker`, `ghast`, `giant`, `guardian`, `hoglin`, `husk`, `illusioner`, `magma_cube`, `phantom`, `piglin`, `piglin_brute`, `pillager`, `ravanger`, `shulker`, `silverfish`, `skeleton`, `slime`, `spider`, `stray`, `fex`, `vindicator`, `witch`, `wither`, `wither_skeleton`, `zoglin`, `zombie`, `zombie_villager`, `zombified_piglin`.
+
+В группу `animals` входят `bee`, `cat`, `chicken`, `cow`, `donkey`, `fox`, `goat`, `horse`, `llama`, `mule`, `mooshroom`, `ocelot`, `panda`, `parrot`, `pig`, `polar_bear`, `rabbit`, `sheep`, `skeleton_horse`, `strider`, `trader_llama`, `turtle`, `wandering_trader`, `wolf`, `zombie_horse`.
+
+В группу `water-animals` входят `dolphin`,  `squid`.
+
+В группу `water-ambient` входят `cod`, `pufferfish`, `salmon`, `tropical_fish`.
+
+В группу `ambient` входит `bat`.
+
 > Оптимальными значениями являются 
 
-> monsters: `50`;
+> monsters: `35`;
 
-> animals: `8`;
+> animals: `10`;
 
-> water-animals: `3`;
+> water-animals: `5`;
 
 > water-ambient: `10`;
 
-> ambient: `1`.
+> ambient: `2`.
 
 #### `ticks-per`
 
@@ -247,7 +234,9 @@
 
 Это расстояние в чанках вокруг игрока, в котором может что-либо происходить. Это включает в себя плавку в печах, выращивание саженцев. Вы должны установить это значение именно в `spigot.yml`, так как оно заменяет значение из `server.properties` и может быть установлено для каждого мира.
 
-> Оптимальным значением является `4`.
+> Оптимальным значением является `7`.
+
+!!! С версии 1.18 это расстояние можно настроить в `server.properties` в пункте `simulation-distance`
 
 #### `seed-structure`
 
@@ -397,8 +386,9 @@
 
 > Оптимальными значениями являются
 
-> soft: `30`
-> hard: `56`.
+> soft: `32`
+
+> hard: `96`.
 
 #### `per-player-mob-spawns`
 
@@ -588,7 +578,9 @@
 
 Включение этой опции не позволяет серверу отправлять пустые пакеты перемещения сущности (по умолчанию сервер отправляет этот пакет для каждой сущности, даже если она не передвигается). Может вызывать некоторые проблемы с плагинами, которые используют сущности на стороне клиента.
 
-> Оптимальным значением является `true`.
+Однако, при включении данной опции, серверу потребуется больше времени, чтобы проверить, должен ли он отправлять пакет, в сравнении с обычной постоянной отправкой пакетов. Проще говоря, после включения этого параметра на процессор возложится больше нагрузки.
+
+> Оптимальным значением является `false`.
 
 #### `aggressive-towards-villager-when-lagging`
 
@@ -624,25 +616,21 @@
 
 > Оптимальным значением является `true`.
 
+### pufferfish.yml
+___
+**Прокси-сервера**
+
 ### config.yml
 
-### flamecord.yml
+### waterfall.yml
 
 ### velocity.toml
 
-## Оптимизация операционной системы
+## Работа в операционной системе
 
 ### Linux
 
-#### Desktop Environment (Графическая оболочка)
-
-Рекомендуемые:
-
-* XFCE 
-* LXQT 
-* LXDE
-
-#### Post-install
+#### Действия после установки системы
 
 Debian
 
@@ -661,18 +649,6 @@ $ `git clone https://aur.archlinux.org/yay.git`
 $ `cd yay`
 
 $ `makepkg -si`
-
-OpenSUSE
-
-$ `здесь обязательно что-то будет`
-
-CentOS
-
-$ `и здесь тоже`
-
-Fedora
-
-$ `и тут`
 
 #### Использование демонов, повышающих производительность системы
 
@@ -768,38 +744,6 @@ WantedBy=multi-user.target
 
 $ `sudo systemctl enable cpupower.service`
 
-#### Использование кастомного ядра
-
-Ядро Liquorix  для Debian'а
-
-$ `curl 'https://liquorix.net/add-liquorix-repo.sh' | sudo bash`
-
-$ `sudo apt install linux-image-liquorix-amd64 linux-headers-liquorix-amd64`
-
-$ `sudo grub-mkconfig -o /boot/grub/grub.cfg`
-
-Ядро Zen для Arch'а
-
-$ `sudo pacman -S linux-zen linux-zen-headers`
-
-_Обновление загрузчика. Для Artix, Manjaro, EndeavourOS, Garuda и прочих arch-based систем с ПРЕДУСТАНОВЛЕННЫМ AUR-пакетом "update-grub" можно использовать следующую команду:_
-
-$ `sudo update-grub`
-
-_На Arch'е нужно использовать либо:_
-
-$ `sudo grub-mkconfig -o /boot/grub/grub.cfg`
-
-_либо поставить AUR-пакет "update-grub" и использовать его._
-
-$ `yay -S update-grub`
-
-$ `sudo update-grub`
-
-### Windows
-
-#### Использование кастомного поверплана
-
 ## Плагины
 
 ### Удаляющие предметы через определенное кол-во времени
@@ -872,8 +816,18 @@ Shared-хостинг - обычно самый дешевый вариант и
 
 # Источники информации
 
-https://github.com/YouHaveTrouble/minecraft-optimization
-https://docs.google.com/document/d/1IjTxl7LaPKJyRoLpGEhm4ptBhob_jRgLLQpMugS7qe8/edit#
-да вообще много источников, на самом-то деле. чуть позже перечислю все.
-.
-.
+[Дискорд сервер PaperMC](https://discord.gg/papermc)
+[Дискорд сервер Airplane](discord.gg/63dDSReB7j)
+[Дискорд сервер Fabric](https://discord.gg/v6v4pMv)
+[Гайд по оптимизации сервера от Paper Chan](https://eternity.community/index.php/paper-optimization/)
+[Гайд по настройке bukkit.yml](https://bukkit.fandom.com/wiki/Bukkit.yml/ru)
+[Ещё один гайд по настройке bukkit.yml](https://blog.airplane.gg/bukkit-configuration/)
+[Гайд по настройке spigot.yml](https://www.spigotmc.org/wiki/spigot-configuration/)
+[Гайд по настройке paper.yml](https://paper.readthedocs.io/en/latest/server/configuration.html)
+[Гайд по настройке tuinity.yml](https://github.com/Tuinity/Tuinity/wiki/Config)
+[Гайд по настройке airplane.yml](https://github.com/TECHNOVE/Airplane/wiki)
+[Гайд по настройке категории Dynamic Entity Activation Range в airplane.yml](https://blog.airplane.gg/dear-configuration/)
+[И снова гайд по настройке airplane.yml]()
+[Настройка Waterfall](https://paper.readthedocs.io/en/latest/waterfall/configuration.html)
+[Настройка Velocity](https://docs.velocitypowered.com/en/latest/users/configuration.html)
+[Гайд по оптимизация Arch Linux от ventureoo](https://github.com/ventureoo/ARU)
