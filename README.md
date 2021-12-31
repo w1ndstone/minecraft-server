@@ -83,7 +83,7 @@
 
 * [Aternos](https://aternos.org/:ru/)
 
-В отличие от Heroku может тянуть 1.16.4, хоть и через жопу. Всё. На этом плюсы заканчиваются, начинаются минусы в виде долгой очереди (раньше спокойно обходилось VPN, сейчас такое провернуть нельзя), отсутствия возможности поставить свои плагины, своё ядро, настроить конфигурационные файлы.
+В отличие от Heroku может кое-как вывозить 1.16.4. Всё. На этом плюсы заканчиваются, начинаются минусы в виде долгой очереди (раньше спокойно обходилось VPN, сейчас такое провернуть нельзя), отсутствия возможности поставить свои плагины, своё ядро, настроить конфигурационные файлы.
 
 * [Minehut](https://minehut.com/)
 
@@ -121,9 +121,10 @@
 
 Рекомендуемые JDK:
 
-* [AdoptOpen](https://adoptopenjdk.net/installation.html?variant=openjdk16&jvmVariant=hotspot)
-* [AmazonCorretto](https://aws.amazon.com/ru/corretto/)
-* [Azul](https://www.azul.com/downloads/?package=jdk)
+* [OpenJDK](https://openjdk.java.net/)
+* [AdoptOpenJDK](https://adoptopenjdk.net/installation.html?variant=openjdk16&jvmVariant=hotspot)
+* [AmazonCorrettoJDK](https://aws.amazon.com/ru/corretto/)
+* [AzulJDK](https://www.azul.com/downloads/?package=jdk)
 
 ### Аргументы запуска Java
 
@@ -147,13 +148,14 @@
 
 * [Spigot](https://getbukkit.org/download/spigot) - форк CraftBukkit с улучшенной производительностью. На сегодняшний день уступает другим ядрам по производительности.
 * [CraftBukkit](https://getbukkit.org/download/craftbukkit) - дефолтное ядро с возможностью ставить плагины. На сегодняшний день сильно уступает другим ядрам по производительности.
-* [Yatopia](https://github.com/YatopiaMC/Yatopia) - свалка патчей со множества ядер. Крайне нестабильное ядро.
+* [Yatopia](https://github.com/YatopiaMC/Yatopia) - во-первых, данное ядро больше не поддерживается, соответственно никаких фиксов багов или эксплоитов (даже критических, к примеру, CVE-2021-44228 Log4j) быть не может. Во-вторых, Ятопия является свалкой патчей со множества других ядер. В ядро запихнули всё, что только можно, отчего оно крайне нестабильное. Подробнее Вы можете узнать [здесь](https://github.com/kennytv/Yaptapia).
 * [Sugarcane](https://github.com/SugarcaneMC/Sugarcane) - Yatopia 2.0.
 * [Patina](https://github.com/PatinaMC/Patina) - Yatopia 2.0.
-* [Mohist](https://mohistmc.com/) - нестабильное ядро.
+* [Mohist](https://mohistmc.com/) - ужасное ядро. Подробнее в этой [статье](https://essentialsx.net/do-not-use-mohist.html).
 * [MCPC+](https://ru-minecraft.ru/plaginy-minecraft/10408-147-mcpc-ogranicheniy-v-modah-dlya-bukkita-bolshe-net.html) - нестабильное ядро.
 * [CatServer](https://github.com/Luohuayu/CatServer) - Mohist 2.0.
 * [Magma](https://github.com/magmafoundation/Magma) - Mohist 2.0.
+* [Akarin](https://github.com/Akarin-project/Akarin) - хуже, чем Yatopia.
 
 ## Выбор прокси-сервера
 
@@ -632,23 +634,21 @@ ___
 
 #### Действия после установки системы
 
-Debian
+**Debian**
+
+Для начала обновим списки пакетов и репозиториев.
 
 $ `sudo apt-get update`
 
-$ `sudo apt-get install git curl make fakeroot`
+Теперь установим необходимое ПО, в том числе и Java, в моем случае я устанавливаю [OpenJDK](https://openjdk.java.net/) версии 17.
 
-Arch
+$ `sudo apt-get install git curl make fakeroot screen openjdk-17-jre -y`
 
-$ `sudo pacman -Syyu`
+Проверим корректность установки Java.
 
-$ `sudo pacman -S base-devel`
+$ `java --version`
 
-$ `git clone https://aur.archlinux.org/yay.git`
-
-$ `cd yay`
-
-$ `makepkg -si`
+#### Загрузка ядра сервера
 
 #### Использование демонов, повышающих производительность системы
 
